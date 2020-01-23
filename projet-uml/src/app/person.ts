@@ -5,7 +5,7 @@ class Person {
   protected name: string;
 
   constructor() {
-    this._id = uuid.v4();
+    //this._id = uuid();
   }
 
   public getName(): string {
@@ -23,4 +23,5 @@ class Person {
   public static build(): Person {
     return new Person();
   }
+
 }
