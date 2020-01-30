@@ -15,12 +15,17 @@ export class HomePageComponent  {
     let file = fileList[0];
     let fileReader: FileReader = new FileReader();
 
-    let self = this;
-    fileReader.onloadend = function(x) {
-      self.fileContent = fileReader.result;
-    }
-
+      fileReader.onloadend = (result) => {
+        //subscrire les données
+        this.fileContent = result.target;
+        console.log(this.fileContent);
+      }
     fileReader.readAsText(file);
+  }
+
+  public check() {
+    if(this.fileContent.length !==1) {
+      throw new Error('File error'); }
   }
 
 }
