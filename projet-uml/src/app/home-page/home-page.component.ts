@@ -1,31 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import {Component, ContentChild, OnInit} from '@angular/core';
+import {HttpClient } from "@angular/common/http";
+import {parser } from 'src/app/parser';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent  {
+export class HomePageComponent {
 
   constructor() { }
-  fileContent: string = '';
 
   public onChange(fileList: FileList): void {
+
     let file = fileList[0];
     let fileReader: FileReader = new FileReader();
 
-      fileReader.onloadend = (result) => {
+        fileReader.onloadend = (result) => {
         //subscrire les données
-        this.fileContent = result.target;
-        console.log(this.fileContent);
-      }
-    fileReader.readAsText(file);
-  }
+        let fileContent = result.target;
+        //console.log(fileContent);
 
-  public check() {
-    if(this.fileContent.length !==1) {
-      throw new Error('File error'); }
+        let parse = new parser();
+        parse.analyze(fileContent);
+
+        }
+        fileReader.readAsText(file);
   }
 
 }
