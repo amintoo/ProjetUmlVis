@@ -11,7 +11,8 @@ export class HomePageComponent {
 
   constructor() { }
 
-  public onChange(fileList: FileList): void {
+  public onChange(fileList: FileList) {
+    if (fileList.length !==1) { throw new Error('can not use multiple files'); }
 
     let file = fileList[0];
     let fileReader: FileReader = new FileReader();
@@ -19,10 +20,10 @@ export class HomePageComponent {
         fileReader.onloadend = (result) => {
         //subscrire les données
         let fileContent = result.target;
-        //console.log(fileContent);
+        console.log(fileContent);
 
         let parse = new parser();
-        parse.analyze(fileContent);
+        //parse.analyze(fileContent);
 
         }
         fileReader.readAsText(file);
